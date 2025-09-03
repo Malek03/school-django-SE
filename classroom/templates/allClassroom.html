@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row mb-5 mt-5"></div>
+</div>
+
+<!-- Main Content -->
+<main class="container-fluid my-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center text-md-start">
+                <h2 class="fw-bold text-success">
+                    <i class="fas fa-school me-2"></i> قائمة الفصول
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card with modern design -->
+    <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 modern-table">
+                <thead class="table-success text-white">
+                    <tr class="text-center">
+                        <th class="py-3 fw-bold"><i class="fas fa-door-open me-1"></i> الاسم</th>
+                        <th class="py-3 fw-bold"><i class="fas fa-building me-1"></i> الطابق</th>
+                        <th class="py-3 fw-bold"><i class="fas fa-cogs me-1"></i> التحكم</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for classroom in classrooms %}
+                        <tr class="border-start border-4 student-row">
+                            <td class="py-3 fw-semibold text-center">{{ classroom.name }}</td>
+                            <td class="py-3 fw-semibold text-center">
+                                <span class="badge bg-light text-dark rounded-pill">{{ classroom.floor }}</span>
+                            </td>
+                            <td class="py-3 text-center">
+                                <div class="btn-group" role="group">
+                                    <a href="#" class="btn btn-outline-warning btn-sm rounded-pill me-1 action-btn" title="تعديل">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-outline-danger btn-sm rounded-pill me-1 action-btn" title="حذف">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                    <a href="{% url 'classroom:students' classroom.id %}" class="btn btn-outline-info btn-sm rounded-pill action-btn" title="تفاصيل">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot class="bg-light">
+                    <tr class="border-top border-3">
+                        <td colspan="2" class="py-3 fw-bold fs-5">
+                            <i class="fas fa-calculator me-2"></i> المجموع:
+                        </td>
+                        <td colspan="1" class="py-3 text-center">
+                            <span class="badge bg-success fs-6 px-3 py-2 rounded-pill">
+                                <i class="fas fa-school me-1"></i> {{ classroom_count }} فصل
+                            </span>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</main>
+
+<!-- Custom Modern CSS -->
+<style>
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.hover-lift {
+    transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.modern-table {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.student-row {
+    transition: all 0.3s ease;
+}
+
+.student-row:hover {
+    background-color: rgba(102, 126, 234, 0.05);
+    transform: scale(1.01);
+}
+
+.action-btn {
+    transition: all 0.3s ease;
+    border-width: 2px;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.card {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.badge {
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .btn-group {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .action-btn {
+        width: 100%;
+    }
+}
+</style>
+
+{% endblock %}

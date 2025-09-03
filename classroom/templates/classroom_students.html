@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+{% block pageTitle %}
+    <div class="welcome-box2">قائمة الطلاب</div>
+{% endblock %}
+</div>
+    <!-- Main Content -->
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>الاسم الأول</th>
+                    <th>الاسم الأخير</th>
+                    <th>العمر</th>
+                    <th>المرحلة الجامعية</th>
+                    <th>المعدل</th>
+                    <th>منتظم</th>
+                    <th>ملاحظة</th>
+                    <th>تحكم</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+{% if student.status == False %}
+                <tr style='background-color:pink;'>
+                    <td>{{student.f_name}}</td>
+                    <td>{{student.l_name}}</td>
+                    <td>{{student.age}}</td>
+                    <td>{{student.level}}</td>
+                    <td>{{student.gpa}}</td>
+                    <td >{{student.status}}</td>
+                    <td >{{student.report}}</td>
+                        <td>
+        <a href="{% url 'student:edit' student.id %}"><i class="fas fa-edit"></i></a>
+        <a href="{% url 'student:delete' student.id %}" class="text-danger"><i class="fas fa-trash-alt"></i></a>
+        <a href="{% url 'student:student_one' student.id %}" class="text-warning"><i class="fas fa-info-alt"></i></a>
+    </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                    <td>{{student.f_name}}</td>
+                    <td>{{student.l_name}}</td>
+                    <td>{{student.age}}</td>
+                    <td>{{student.level}}</td>
+                    <td>{{student.gpa}}</td>
+                    <td >{{student.status}}</td>
+                    <td >{{student.report}}</td>
+                    <td>
+                        <a href="{% url 'student:edit' student.id %}"><i class="fas fa-edit"></i></a>
+                        <a href="{% url 'student:delete' student.id %}" class="text-danger"><i class="fas fa-trash-alt"></i></a>
+                        <a href="{% url 'student:student_one' student.id %}" class="text-warning"><i class="fas fa-info-alt"></i></a>
+                </td>
+                    <tr>
+                    {% endif %}
+                {% endfor%}
+            </tbody>
+            <tfoot>
+                <td colspan='2'>المجموع:</td>
+                <td colspan='5'>{{students_count}}</td>
+            </tfoot>
+        </table>
+    </main>
+{% endblock %}

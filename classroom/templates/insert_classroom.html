@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row mb-5 mt-5"></div>
+</div>
+
+<div class="container-fluid p-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <div class="card shadow-lg border-0">
+                <!-- رأس البطاقة -->
+                <div class="card-header bg-success text-white text-center py-3">
+                    <h3 class="mb-0 text-white">
+                        <i class="bi bi-door-open-fill me-2"></i> إضافة فصل جديد
+                    </h3>
+                </div>
+
+                <!-- جسم البطاقة -->
+                <div class="card-body p-4">
+                    <!-- عرض الأخطاء -->
+                    {% if errors %}
+                        <div class="alert alert-danger">
+                            {% for field, field_errors in errors.items %}
+                                <p><strong>{{ field }}:</strong> {{ field_errors|join:", " }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <!-- الفورم -->
+                    <form method="post" action="{% url 'classroom:newClass' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="row g-3">
+                            <!-- اسم الفصل -->
+                            <div class="col-md-6">
+                                <input type="text" 
+                                       class="form-control form-control-lg" 
+                                       name="name" 
+                                       placeholder="أدخل اسم الفصل" 
+                                       required>
+                                <div class="valid-feedback">ممتاز!</div>
+                            </div>
+
+                            <!-- الطابق -->
+                            <div class="col-md-6">
+                                <input type="number" 
+                                       class="form-control form-control-lg" 
+                                       name="floor" 
+                                       placeholder="أدخل الطابق" 
+                                       required min="1" max="20">
+                            </div>
+
+                            <!-- زر الإرسال -->
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-success btn-lg px-5 py-3">
+                                    <i class="bi bi-plus-circle me-2"></i> إضافة الفصل
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- زر الرجوع -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'classroom:classrooms' %}" 
+                           class="btn btn-outline-primary px-4 py-2 rounded-pill">
+                            <i class="bi bi-arrow-left me-2"></i> الرجوع إلى قائمة الفصول
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- تنسيقات CSS العصرية -->
+<style>
+.form-control:focus, .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.form-control:hover, .form-select:hover {
+    border-color: #0d6efd;
+}
+
+.btn-success {
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+}
+
+.btn-outline-primary {
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+}
+</style>
+
+{% endblock %}

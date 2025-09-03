@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row mb-5"></div>
+</div>
+<section id="about" class="about section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-6 pe-lg-5" data-aos="fade-right" data-aos-delay="200">
+                <h2 class="display-6 fw-bold mb-4">{{student.id}}-{{ student.f_name }}<span> {{ student.l_name }}</span></h2>
+                <p class="lead mb-4">report -: {{ student.report }}</p>
+                <div class="d-flex flex-wrap gap-4 mb-4">
+                    <div class="stat-box">
+                    <span class="stat-number">{{ student.age }}</span>
+                    <span class="stat-label">Years</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">{{ student.status }}</span>
+                    <span class="stat-label">Status</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">{{ student.gpa }}</span>
+                    <span class="stat-label">GPA</span>
+                </div>
+                </div>
+                <p class="lead mb-4">Image Info</p>
+                <div class="d-flex flex-wrap gap-4 mb-4">
+                    <div class="stat-box">
+                    <span class="stat-number">{{ student.image.width }} px</span>
+                    <span class="stat-label">Width</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">{{ student.image.height }} px</span>
+                    <span class="stat-label">Height</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">{{ student.image.size|filesizeformat }}</span>
+                    <span class="stat-label">Size</span>
+                </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg-4" data-aos="fade-left" data-aos-delay="300">
+                <div class="image-stack">
+                <div class="image-stack-item image-stack-item-top" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="{{ student.image.url }}" alt="Campus Life" class="img-fluid rounded-4 shadow-lg">
+                </div>
+                <div class="image-stack-item image-stack-item-bottom" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="{{ student.image.url }}" alt="Students" class="img-fluid rounded-4 shadow-lg">
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
