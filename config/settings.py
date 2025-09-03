@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'SchoolLab3',
-        'USER':'root',
-        'PASSWORD':'',
-        'HOST':'127.0.0.1',
-        'PORT':'3306'
+        'NAME': 'school_db',   # اسم القاعدة اللي استوردت فيها الـ SQL
+        'USER': 'myuser',         # المستخدم اللي أنشأته
+        'PASSWORD': 'mypassword', # كلمة المرور اللي اخترتها
+        'HOST': '127.0.0.1',      # أو 'localhost'
+        'PORT': '3306',
     }
 }
 
